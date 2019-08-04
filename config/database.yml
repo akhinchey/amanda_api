@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 20 } %>
+  timeout: 5000
+  encoding: utf8
+  template: template1 # Required for UTF8 encoding
+
+development:
+  <<: *default
+  database: amanda_api
+
+test:
+  <<: *default
+  database: amanda_api_test
+
+staging:
+  <<: *default
+  database: amanda_api_postgres_staging
+
+production:
+  <<: *default
+  database: amanda_api_postgres_prod
